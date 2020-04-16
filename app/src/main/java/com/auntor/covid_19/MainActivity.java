@@ -29,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private CovidApi covidApi;
-    MyAdapter myAdapter;
+    MyAdapter adapter;
     RecyclerView RV;
     EditText editText;
     ArrayList<Raw_Data> data;
@@ -86,7 +86,7 @@ filter(s.toString());
             }
         }
         Log.d("FilterList","ff"+filteredList);
-        myAdapter.filterList(filteredList);
+        adapter.filterList(filteredList);
 //Log.d("FilterList","ff"+filteredList);
 //        MyAdapter myAdapter = new MyAdapter(filteredList,getApplicationContext()) ;
 //   myAdapter.filterList(filteredList);
@@ -112,7 +112,7 @@ filter(s.toString());
                 data = (ArrayList<Raw_Data>) response.body().getData();
                  RV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-                 MyAdapter adapter = new MyAdapter(data,getApplicationContext());
+                  adapter = new MyAdapter(data,getApplicationContext());
                  RV.setAdapter(adapter);
 
              }else{
