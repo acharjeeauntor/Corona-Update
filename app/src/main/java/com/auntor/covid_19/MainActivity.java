@@ -16,7 +16,10 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Adapter;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,10 +29,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private CovidApi covidApi;
+    MyAdapter myAdapter;
     RecyclerView RV;
     EditText editText;
     ArrayList<Raw_Data> data;
-    MyAdapter mAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,28 +69,40 @@ filter(s.toString());
             }
         });
 
-
+        Log.d("Data","dd"+data);
 
     }
 
 
     private void filter(String text){
+        Log.d("Text",text);
+        Log.d("Data","dd"+data);
         ArrayList<Raw_Data> filteredList = new ArrayList<>();
 
         for (Raw_Data item : data) {
             if (item.getCountry().toLowerCase().contains(text.toLowerCase())) {
+                Log.d("Item",item.getCountry().toLowerCase());
                 filteredList.add(item);
             }
         }
+        Log.d("FilterList","ff"+filteredList);
+        myAdapter.filterList(filteredList);
+//Log.d("FilterList","ff"+filteredList);
+//        MyAdapter myAdapter = new MyAdapter(filteredList,getApplicationContext()) ;
+//   myAdapter.filterList(filteredList);
 
-        mAdapter.filterList(filteredList);
     }
-
 
 
     private void getDataByDate() {
 
-     Call<OurMainDataClass> call= covidApi.getAllData("2020-04-15");
+        //Set Current Date
+        Date today = Calendar.getInstance().getTime();//getting date
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");//formating according to my need
+        String da = formatter.format(today);
+
+        //Start Retrofit
+     Call<OurMainDataClass> call= covidApi.getAllData(da);
      call.enqueue(new Callback<OurMainDataClass>() {
          @Override
          public void onResponse(Call<OurMainDataClass> call, Response<OurMainDataClass> response) {

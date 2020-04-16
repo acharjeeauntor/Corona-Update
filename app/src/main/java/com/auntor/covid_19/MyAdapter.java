@@ -5,22 +5,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
 
     ArrayList<Raw_Data> apiData;
     Context context;
 
+    public MyAdapter() {
+
+    }
+
+    public MyAdapter(ArrayList<Raw_Data> apiData) {
+        this.apiData = apiData;
+    }
 
     public MyAdapter(ArrayList<Raw_Data> apiData, Context context) {
         this.apiData = apiData;
@@ -38,6 +40,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+        Log.d("OnBind","ApiData"+apiData);
         holder.countryName.setText(apiData.get(position).getCountry());
         holder.activeCase.setText(apiData.get(position).getActive_case());
         holder.todayDeath.setText(apiData.get(position).getNew_death());
@@ -54,7 +57,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
     }
 
     public void filterList(ArrayList<Raw_Data> filteredList) {
-        apiData = filteredList;
-        notifyDataSetChanged();
+        Log.d("Adap Filter",""+filteredList);
+        Log.d("OnFilterList","ApiData"+apiData);
+apiData=filteredList;
+    notifyDataSetChanged();
     }
 }
