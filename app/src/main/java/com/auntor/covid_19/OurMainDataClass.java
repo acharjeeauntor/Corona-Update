@@ -9,6 +9,13 @@ private String message;
 private Object statistics;
     private ArrayList<Raw_Data> data;
 
+
+    public OurMainDataClass(String status_code, String message, ArrayList<Raw_Data> data) {
+        this.status_code = status_code;
+        this.message = message;
+        this.data = data;
+    }
+
     public OurMainDataClass(String status_code, String message, Object statistics, ArrayList<Raw_Data> data) {
         this.status_code = status_code;
         this.message = message;

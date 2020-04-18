@@ -1,5 +1,7 @@
 package com.auntor.covid_19;
 
+import java.util.ArrayList;
+
 public class Raw_Data {
     private int id;
     private String country;
@@ -113,7 +115,7 @@ public class Raw_Data {
     }
 
     public String getCreated_at() {
-        return created_at;
+      return created_at;
     }
 
     public void setCreated_at(String created_at) {

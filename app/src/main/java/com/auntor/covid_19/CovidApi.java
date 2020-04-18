@@ -14,4 +14,7 @@ public interface CovidApi {
     @GET("data")
     Call<OurMainDataClass> getAllData(@Query("date") String date);
 
+    @GET("details")
+    Call<OurMainDataClass> getCountryData(@Query("country") String country);
+
 }

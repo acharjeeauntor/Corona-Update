@@ -1,46 +1,55 @@
 package com.auntor.covid_19;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
+public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+    private CovidApi covidApi;
     ArrayList<Raw_Data> apiData;
-    Context context;
+    Context mcontext;
 
-    public MyAdapter() {
 
-    }
-
-    public MyAdapter(ArrayList<Raw_Data> apiData) {
-        this.apiData = apiData;
-    }
 
     public MyAdapter(ArrayList<Raw_Data> apiData, Context context) {
         this.apiData = apiData;
-        this.context = context;
+        this.mcontext = context;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View v = LayoutInflater.from(context).inflate(R.layout.row_layout,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_layout, parent, false);
         MyViewHolder VH = new MyViewHolder(v);
         return VH;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-        Log.d("OnBind","ApiData"+apiData);
+
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://corona.pixonlab.com/api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        covidApi = retrofit.create(CovidApi.class);
+
         holder.countryName.setText(apiData.get(position).getCountry());
         holder.activeCase.setText(apiData.get(position).getActive_case());
         holder.todayDeath.setText(apiData.get(position).getNew_death());
@@ -50,16 +59,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
         holder.totalInfected.setText(apiData.get(position).getTotal_case());
         holder.critical.setText(apiData.get(position).getSerious_critical());
 
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mcontext, ChartActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                  intent.putExtra("Country_Name",apiData.get(position).getCountry().toLowerCase());
+                mcontext.startActivity(intent);
+            }
+        });
     }
+
     @Override
     public int getItemCount() {
         return (apiData == null) ? 0 : apiData.size();
     }
 
     public void filterList(ArrayList<Raw_Data> filteredList) {
-        Log.d("Adap Filter",""+filteredList);
-        Log.d("OnFilterList","ApiData"+apiData);
-apiData=filteredList;
-    notifyDataSetChanged();
+        apiData = filteredList;
+        notifyDataSetChanged();
+
     }
 }

@@ -1,15 +1,19 @@
 package com.auntor.covid_19;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyViewHolder extends RecyclerView.ViewHolder{
+public class MyViewHolder extends RecyclerView.ViewHolder {
+
 
     TextView totalInfected,totalDeath,totalRecovered,critical,
             todayInfected,todayDeath,deathRate,activeCase,countryName;
+    CardView cardView;
 
 
     public MyViewHolder(@NonNull View itemView) {
@@ -24,5 +28,8 @@ public class MyViewHolder extends RecyclerView.ViewHolder{
         deathRate = itemView.findViewById(R.id.deathratecount);
         totalRecovered = itemView.findViewById(R.id.tvreccount);
         critical = itemView.findViewById(R.id.tvCriticalcount);
-    }
+cardView = itemView.findViewById(R.id.cardId);
+
+        }
+
 }
