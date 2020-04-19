@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-    TextView totalInfected,totalDeath,totalRecovered,critical,
-            todayInfected,todayDeath,deathRate,activeCase,countryName;
+    TextView totalInfected, totalDeath, totalRecovered, critical,
+            todayInfected, todayDeath, lastUpdate, activeCase, countryName, deathRate;
     CardView cardView;
 
 
@@ -25,11 +25,11 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         todayInfected = itemView.findViewById(R.id.todayinfectedcount);
         todayDeath = itemView.findViewById(R.id.todaydeathcount);
         totalDeath = itemView.findViewById(R.id.totaldeathcount);
-        deathRate = itemView.findViewById(R.id.deathratecount);
+        lastUpdate = itemView.findViewById(R.id.lastUpdateCount);
         totalRecovered = itemView.findViewById(R.id.tvreccount);
         critical = itemView.findViewById(R.id.tvCriticalcount);
-cardView = itemView.findViewById(R.id.cardId);
-
-        }
+        cardView = itemView.findViewById(R.id.cardId);
+        deathRate = itemView.findViewById(R.id.deathRateCount);
+    }
 
 }

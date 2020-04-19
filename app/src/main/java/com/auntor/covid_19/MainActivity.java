@@ -1,13 +1,21 @@
 package com.auntor.covid_19;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -17,10 +25,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Adapter;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 
 import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil;
 
@@ -35,164 +48,101 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
-    private CovidApi covidApi;
-    MyAdapter adapter;
-    RecyclerView RV;
-    EditText editText;
-    ArrayList<Raw_Data> data;
-    ProgressDialog progressDialog;
-    SwipeRefreshLayout swipeRefreshLayout;
-
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private DrawerLayout drawer;
+    private Toolbar toolbar;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //TODO:Check is Internet is on or not?
-        if (!isNetwork(getApplicationContext())){
-            Toast.makeText(getApplicationContext(), " No Internet Connection"+"\n"+"Please Turn On Internet Connection", Toast.LENGTH_LONG).show();
-        }else{
-
-
-            //TODO:Find Widgets
-            RV = findViewById(R.id.recyclerId);
-            editText = findViewById(R.id.searchId);
-            swipeRefreshLayout=findViewById(R.id.refreshId);
+       // getSupportActionBar().setTitle("Corona Update Data");
 
 
 
-            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    getDataByDate();
-                    editText.setText("");
-                    swipeRefreshLayout.setRefreshing(false);
-                }
-            });
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
 
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://corona.pixonlab.com/api/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-
-            covidApi = retrofit.create(CovidApi.class);
-            getDataByDate();
-
-            editText.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    filter(s.toString());
-                }
-            });
-
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new DeashboardFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_dashboard);
         }
     }
 
+//TODO: OUT of OnCreate
+    //TODO:Methods Implementation
 
-    private void filter(String text) {
-//        Log.d("Text",text);
-//        Log.d("Data","dd"+data);
-        ArrayList<Raw_Data> filteredList = new ArrayList<>();
 
-        for (Raw_Data item : data) {
-            if (item.getCountry().toLowerCase().contains(text.toLowerCase())) {
-                //Log.d("Item",item.getCountry().toLowerCase());
-                filteredList.add(item);
-            }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_dashboard:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new DeashboardFragment()).commit();
+                break;
+            case R.id.nav_feedback:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FeedbackFragment()).commit();
+                break;
+            case R.id.nav_bangladesh:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new BangladeshFragment()).commit();
+                break;
+            case R.id.nav_information:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new InformationFragment()).commit();
+                break;
+            case R.id.nav_about:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new AboutFragmentActivity()).commit();
+                break;
+            case R.id.nav_share:
+                shareLink();
+                break;
+
         }
-        //Log.d("FilterList","ff"+filteredList);
-        adapter.filterList(filteredList);
-//Log.d("FilterList","ff"+filteredList);
-//        MyAdapter myAdapter = new MyAdapter(filteredList,getApplicationContext()) ;
-//   myAdapter.filterList(filteredList);
 
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
 
-    private void getDataByDate() {
-
-        //ProgressDialog Showing
-        setProgressDialog();
-
-        //TODO:Set Current Date
-        Date today = Calendar.getInstance().getTime();//getting date
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");//formating according to my need
-        //Log.i("Date", "" + formatter);
-        String da = formatter.format(today);
-       // Log.d("Date", da);
-
-        //TODO:Start Retrofit
-        Call<OurMainDataClass> call = covidApi.getAllData(da);
-        call.enqueue(new Callback<OurMainDataClass>() {
-            @Override
-            public void onResponse(Call<OurMainDataClass> call, Response<OurMainDataClass> response) {
-                if (response.isSuccessful()) {
-                    //Log.d("Res","Done");
-                    data = (ArrayList<Raw_Data>) response.body().getData();
-                    RV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-                    adapter = new MyAdapter(data, getApplicationContext());
-                    RV.setAdapter(adapter);
-
-                    progressDialog.dismiss();
-
-                } else {
-                    // Log.d("Error","Failed");
-                    Toast.makeText(getApplicationContext(), "Server Error " + "\n" + "Please Wait For Sometimes", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<OurMainDataClass> call, Throwable t) {
-//Log.d("Error","Failed");
-                Toast.makeText(getApplicationContext(), "Server Error " + "\n" + "Please Wait For Sometimes", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-    }
-
-    public void setProgressDialog(){
-        //Init Progress Dialog
-        progressDialog = new ProgressDialog(MainActivity.this);
-        //show Dialog
-        progressDialog.show();
-        //Set Content View
-        progressDialog.setContentView(R.layout.progress_dialog);
-        //Set Transparent background
-        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        progressDialog.setCancelable(false);
-    }
 
     @Override
     public void onBackPressed() {
-        progressDialog.setCancelable(false);
-        super.onBackPressed();
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
-    public boolean isNetwork(Context context) {
 
-        ConnectivityManager cm = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            return true;
-        }
-        return false;
+
+
+    private void shareLink() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+
+        String subject = "App Name: MyBudget";
+        String body = "this is package name of the app:\n com.auntor.mybudget";
+
+        intent.putExtra(Intent.EXTRA_SUBJECT,subject);
+        intent.putExtra(Intent.EXTRA_TEXT,body);
+
+        startActivity(Intent.createChooser(intent,"share with"));
     }
 }
 

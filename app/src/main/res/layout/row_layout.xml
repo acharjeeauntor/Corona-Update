@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="25dp"
+    android:layout_margin="15dp"
     android:orientation="vertical"
-    android:padding="10dp"
+    android:padding="25dp"
     android:id="@+id/cardId"
     app:cardCornerRadius="10dp"
     android:background="#7AFFFFFF"
@@ -37,11 +37,13 @@
         <View
             android:id="@+id/divider"
             style="@style/Divider"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_below="@+id/countryNameId" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:id="@+id/twocard"
         android:layout_below="@id/titleOfCard"
         android:layout_centerHorizontal="true"
@@ -236,26 +238,57 @@
                         android:layout_marginLeft="17dp"
                         android:textSize="18dp" />
 
-
     <TextView
-        android:id="@+id/deathrate"
+        android:id="@+id/deathRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/totaldeath"
         android:text="Death Rate"
+        android:textColor="#0A9610"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/deathRateCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/deathRate"
+        android:layout_below="@id/totaldeathcount"
+        android:text="150000"
+        android:textColor="#D8312F2F"
+        android:layout_marginLeft="17dp"
+        android:textSize="18dp" />
+
+
+
+    <TextView
+        android:id="@+id/lastUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/deathRate"
+        android:text="Last Updated"
         android:textColor="#3E09E0"
         android:textSize="18dp" />
 
     <TextView
-        android:id="@+id/deathratecount"
+        android:id="@+id/lastUpdateCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/deathrate"
-        android:layout_below="@id/totaldeathcount"
-        android:text="1.5%"
+        android:layout_toRightOf="@id/deathRate"
+        android:layout_below="@id/deathRateCount"
+        android:text="ererererrerer"
         android:textColor="#D8312F2F"
-        android:layout_marginLeft="17dp"
-        android:textSize="18dp" />
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="25dp"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lastUpdateCount"
+       android:gravity="center"
+        android:layout_marginTop="6dp"
+        android:text="Click For More Information"
+        />
 
 </RelativeLayout>
             </androidx.cardview.widget.CardView>

@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import retrofit2.Retrofit;
@@ -47,8 +48,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-
         covidApi = retrofit.create(CovidApi.class);
+
+        //TODO:Calculate Death Rate
+        String x =apiData.get(position).getTotal_death().replace("+", "").replace(",","");
+        String y = apiData.get(position).getTotal_case().replace("+","").replace(",","");
+
+         long tD=Integer.parseInt(x);
+       long tC=Integer.parseInt(y);
+        double c = ((double)tD/tC)*100;
+        String result = String.format("%.2f", c);
 
         holder.countryName.setText(apiData.get(position).getCountry());
         holder.activeCase.setText(apiData.get(position).getActive_case());
@@ -58,13 +67,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.totalDeath.setText(apiData.get(position).getTotal_death());
         holder.totalInfected.setText(apiData.get(position).getTotal_case());
         holder.critical.setText(apiData.get(position).getSerious_critical());
+        holder.lastUpdate.setText(apiData.get(position).getUpdated_at()+"(GMT)");
+        holder.deathRate.setText(result+"%");
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mcontext, ChartActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                  intent.putExtra("Country_Name",apiData.get(position).getCountry().toLowerCase());
+                  intent.putExtra("Country_Name",apiData.get(position).getCountry());
                 mcontext.startActivity(intent);
             }
         });
