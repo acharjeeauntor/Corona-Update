@@ -144,8 +144,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
 
-        String subject = "App Name: MyBudget";
-        String body = "this is package name of the app:\n com.auntor.mybudget";
+        String subject = "App Name: Covid19";
+        String body = "https://drive.google.com/uc?export=download&id=1K6CGlj7cUG4RDKUPTTI5X71OylS66nAo";
 
         intent.putExtra(Intent.EXTRA_SUBJECT,subject);
         intent.putExtra(Intent.EXTRA_TEXT,body);
