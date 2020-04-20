@@ -46,12 +46,9 @@ public class ChartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
-
 
         barChart = findViewById(R.id.barId);
         barChart2 = findViewById(R.id.bar2Id);
-
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://corona.pixonlab.com/api/")
@@ -78,10 +75,9 @@ public class ChartActivity extends AppCompatActivity {
 
         setProgressDialog();
 
-
-        barEntryArrayList = new ArrayList<>();
-        labelNames = new ArrayList<>();
-        infectedBarEntry = new ArrayList<>();
+        barEntryArrayList = new ArrayList<>(10);
+        labelNames = new ArrayList<>(10);
+        infectedBarEntry = new ArrayList<>(10);
 
         //TODO:Start Retrofit
         Call<OurMainDataClass> call = covidApi.getCountryData(country);
@@ -107,7 +103,6 @@ public class ChartActivity extends AppCompatActivity {
                         String f = infected.replace(",", "");
                         int NI = !f.equals("") ? Integer.parseInt(f) : 0;
 
-
                         barEntryArrayList.add(new BarEntry(i, ND));
                         labelNames.add(dates);
                         infectedBarEntry.add(new BarEntry(i, NI));
@@ -115,14 +110,12 @@ public class ChartActivity extends AppCompatActivity {
                         barinfo();
                         progressDialog.dismiss();
 
-
                     }
                 } else {
-                    // Log.d("Error","Failed");
                     Toast.makeText(getApplicationContext(), "Server Error " + "\n" + "Please Wait For Sometimes", Toast.LENGTH_SHORT).show();
                 }
             }
-
+//Author:Auntor Acharja
             @Override
             public void onFailure(Call<OurMainDataClass> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Server Error " + "\n" + "Please Wait For Sometimes", Toast.LENGTH_SHORT).show();
@@ -138,6 +131,7 @@ public class ChartActivity extends AppCompatActivity {
         barDataSet2.setColors(ColorTemplate.COLORFUL_COLORS);
         barData2 = new BarData(barDataSet2);
         barChart2.setData(barData2);
+        barChart2.setDescription(null);
         xAxis2 = barChart2.getXAxis();
         xAxis2.setValueFormatter(new IndexAxisValueFormatter(labelNames));
         xAxis2.setPosition(XAxis.XAxisPosition.TOP);
@@ -145,7 +139,7 @@ public class ChartActivity extends AppCompatActivity {
         xAxis2.setDrawAxisLine(false);
         xAxis2.setGranularity(0.5f);
         xAxis2.setLabelCount(labelNames.size());
-       xAxis2.setLabelRotationAngle(270);
+        xAxis2.setLabelRotationAngle(270);
         barChart2.animateY(2000);
         barChart2.invalidate();
 
@@ -158,12 +152,13 @@ public class ChartActivity extends AppCompatActivity {
         barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         barData = new BarData(barDataSet);
         barChart.setData(barData);
+        barChart.setDescription(null);
         xAxis = barChart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labelNames));
         xAxis.setPosition(XAxis.XAxisPosition.TOP);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
-       xAxis.setGranularity(1f);
+        xAxis.setGranularity(1f);
         xAxis.setLabelCount(labelNames.size());
         xAxis.setLabelRotationAngle(270);
         barChart.animateY(2000);

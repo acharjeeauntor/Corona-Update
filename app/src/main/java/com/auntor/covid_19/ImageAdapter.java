@@ -1,6 +1,7 @@
 package com.auntor.covid_19;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -46,4 +47,5 @@ R.drawable.image_1,R.drawable.image_2,R.drawable.img3,R.drawable.img4,R.drawable
         imageView.setLayoutParams(new GridView.LayoutParams(340,350));
         return imageView;
     }
-}
+
+    }

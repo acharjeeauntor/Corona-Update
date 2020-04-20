@@ -41,8 +41,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
-
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://corona.pixonlab.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -54,10 +52,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         String x =apiData.get(position).getTotal_death().replace("+", "").replace(",","");
         String y = apiData.get(position).getTotal_case().replace("+","").replace(",","");
 
-         long tD=Integer.parseInt(x);
+        long tD=Integer.parseInt(x);
        long tC=Integer.parseInt(y);
-        double c = ((double)tD/tC)*100;
+
+           double c = ((double)tD/tC)*100;
         String result = String.format("%.2f", c);
+
 
         holder.countryName.setText(apiData.get(position).getCountry());
         holder.activeCase.setText(apiData.get(position).getActive_case());

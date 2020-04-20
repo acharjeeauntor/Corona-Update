@@ -14,20 +14,17 @@ android:gravity="center"
         android:weightSum="2" >
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barId"
-                android:layout_width="350dp"
+                android:layout_width="150dp"
                 android:layout_weight="1"
-
-                android:layout_marginTop="10dp"
-
+                android:layout_marginTop="15dp"
                 android:layout_height="0dp" />
-
         <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/bar2Id"
-            android:layout_width="350dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
+            android:id="@+id/barId2"
+            android:layout_width="150dp"
             android:layout_weight="1"
+            android:layout_marginBottom="5dp"
             android:layout_height="0dp" />
+
     </LinearLayout>
 
 

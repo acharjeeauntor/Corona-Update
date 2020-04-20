@@ -104,34 +104,18 @@ public class DeashboardFragment extends Fragment {
 
         }
 
-
-
-
-
-
-
-
-
         return rootView;
     }
 
     private void filter(String text) {
-//        Log.d("Text",text);
-//        Log.d("Data","dd"+data);
-        ArrayList<Raw_Data> filteredList = new ArrayList<>();
+        ArrayList<Raw_Data> filteredList = new ArrayList<>(700);
 
         for (Raw_Data item : data) {
             if (item.getCountry().toLowerCase().contains(text.toLowerCase())) {
-                //Log.d("Item",item.getCountry().toLowerCase());
                 filteredList.add(item);
             }
         }
-        //Log.d("FilterList","ff"+filteredList);
         adapter.filterList(filteredList);
-//Log.d("FilterList","ff"+filteredList);
-//        MyAdapter myAdapter = new MyAdapter(filteredList,getApplicationContext()) ;
-//   myAdapter.filterList(filteredList);
-
     }
 
 
@@ -143,9 +127,7 @@ public class DeashboardFragment extends Fragment {
         //TODO:Set Current Date
         Date today = Calendar.getInstance().getTime();//getting date
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");//formating according to my need
-        //Log.i("Date", "" + formatter);
         String da = formatter.format(today);
-        // Log.d("Date", da);
 
         //TODO:Start Retrofit
         Call<OurMainDataClass> call = covidApi.getAllData(da);
@@ -153,7 +135,6 @@ public class DeashboardFragment extends Fragment {
             @Override
             public void onResponse(Call<OurMainDataClass> call, Response<OurMainDataClass> response) {
                 if (response.isSuccessful()) {
-                    //Log.d("Res","Done");
                     data = (ArrayList<Raw_Data>) response.body().getData();
                     RV.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -163,16 +144,13 @@ public class DeashboardFragment extends Fragment {
                     progressDialog.dismiss();
 
                 } else {
-                    // Log.d("Error","Failed");
                     Toast.makeText(getContext(), "Server Error " + "\n" + "Please Wait For Sometimes", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<OurMainDataClass> call, Throwable t) {
-//Log.d("Error","Failed");
                 Toast.makeText(getContext(), "Server Error " + "\n" + "Please Wait For Sometimes", Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -190,12 +168,6 @@ public class DeashboardFragment extends Fragment {
         progressDialog.setCancelable(false);
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        progressDialog.setCancelable(false);
-//        super.onBackPressed();
-//    }
-
     public boolean isNetwork(Context context) {
 
         ConnectivityManager cm = (ConnectivityManager) context
@@ -206,7 +178,5 @@ public class DeashboardFragment extends Fragment {
         }
         return false;
     }
-
-
 
 }

@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:orientation="vertical"
+    android:padding="25dp"
+    android:id="@+id/cardId"
+    app:cardCornerRadius="10dp"
+    android:background="#7AFFFFFF"
+    app:cardElevation="5dp">
+
+
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:background="#FCFFFFFF"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/titleOfCard"
+        android:background="#fff"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/countryNameId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"
+            android:text="World"
+            android:textColor="#A83A3737"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/divider"
+            style="@style/Divider"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_below="@+id/countryNameId" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="8dp"
+        android:id="@+id/twocard"
+        android:layout_below="@id/titleOfCard"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:background="#fff"
+        android:paddingLeft="20dp"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/firstCard"
+            android:background="#fff"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="#fff">
+
+                    <TextView
+                        android:id="@+id/tvinfected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Infected"
+                        android:textColor="#000"
+                        android:textSize="28dp" />
+
+                    <TextView
+                        android:id="@+id/tvinfectedcount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="17dp"
+                        android:layout_toRightOf="@+id/tvinfected"
+                        android:text="150000"
+                        android:textColor="#D8312F2F"
+                        android:textSize="28dp" />
+
+
+                    <TextView
+                        android:id="@+id/tvrec"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvinfected"
+                        android:text="Total Recovered"
+                        android:textColor="#000"
+                        android:textSize="28dp" />
+
+                    <TextView
+                        android:id="@+id/tvreccount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvinfectedcount"
+                        android:layout_marginLeft="17dp"
+                        android:layout_toRightOf="@id/tvrec"
+                        android:text="150000"
+                        android:textColor="#D8312F2F"
+                        android:textSize="28dp" />
+
+
+                    <TextView
+                        android:id="@+id/tvActive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvrec"
+                        android:text="Active Case"
+                        android:textColor="#111010"
+                        android:textSize="28dp" />
+
+                    <TextView
+                        android:id="@+id/tvActivecount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvreccount"
+                        android:layout_marginLeft="17dp"
+                        android:layout_toRightOf="@id/tvActive"
+                        android:text="150000"
+                        android:textColor="#D8312F2F"
+                        android:textSize="28dp" />
+
+                    <TextView
+                        android:id="@+id/tvCritical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvActive"
+                        android:text="Serious Critical"
+                        android:textColor="#111010"
+                        android:textSize="28dp" />
+
+                    <TextView
+                        android:id="@+id/tvCriticalcount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvActivecount"
+                        android:layout_marginLeft="17dp"
+                        android:layout_toRightOf="@id/tvCritical"
+                        android:text="150000"
+                        android:textColor="#D8312F2F"
+                        android:textSize="28dp" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <!--        second card-->
+
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/secondCard"
+                android:background="#fff"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/firstCard"
+                android:layout_height="wrap_content">
+
+
+            <androidx.cardview.widget.CardView
+                android:background="#fff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+
+<RelativeLayout
+    android:background="#fff"
+    android:layout_width="wrap_content"
+    android:id="@+id/lastText"
+    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/todayinfected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Today Infected"
+                        android:textColor="#C62828"
+                        android:textSize="28dp" />
+
+                    <TextView
+                        android:id="@+id/todayinfectedcount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/todayinfected"
+                        android:text="150000"
+                        android:textColor="#D8312F2F"
+                        android:layout_marginLeft="17dp"
+                        android:textSize="28dp" />
+
+
+    <TextView
+        android:id="@+id/todaydeath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/todayinfected"
+        android:text="Today Death"
+        android:textColor="#C62828"
+        android:textSize="28dp" />
+
+                    <TextView
+                        android:id="@+id/todaydeathcount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/todaydeath"
+                        android:layout_below="@id/todayinfectedcount"
+                        android:text="150000"
+                        android:textColor="#D8312F2F"
+                        android:layout_marginLeft="17dp"
+                        android:textSize="28dp" />
+
+
+                    <TextView
+                        android:id="@+id/totaldeath"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Death"
+                        android:textColor="#C62828"
+                        android:layout_below="@id/todaydeath"
+                        android:textSize="28dp" />
+
+                    <TextView
+                        android:id="@+id/totaldeathcount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/totaldeath"
+                        android:layout_below="@id/todaydeathcount"
+                        android:text="150000"
+                        android:textColor="#D8312F2F"
+                        android:layout_marginLeft="17dp"
+                        android:textSize="28dp" />
+
+    <TextView
+        android:id="@+id/deathRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/totaldeath"
+        android:text="Death Rate"
+        android:textColor="#0A9610"
+        android:textSize="28dp" />
+
+    <TextView
+        android:id="@+id/deathRateCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/deathRate"
+        android:layout_below="@id/totaldeathcount"
+        android:text="150000"
+        android:textColor="#D8312F2F"
+        android:layout_marginLeft="17dp"
+        android:textSize="28dp" />
+
+
+
+    <TextView
+        android:id="@+id/lastUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/deathRate"
+        android:text="Last Updated"
+        android:textColor="#3E09E0"
+        android:textSize="28dp" />
+
+    <TextView
+        android:id="@+id/lastUpdateCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/deathRate"
+        android:layout_below="@id/deathRateCount"
+        android:text="ererererrerdfggfgdgdgdfgfgbffbfer"
+        android:textColor="#D8312F2F"
+        android:layout_marginLeft="40dp"
+        android:textSize="28dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lastUpdateCount"
+       android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:textSize="30dp"
+        android:text="Click For More Information"
+        />
+
+</RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+</androidx.cardview.widget.CardView>
