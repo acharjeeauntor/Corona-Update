@@ -41,4 +41,5 @@ dependencies {
     implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:3.0.0-RC2'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    implementation 'com.android.volley:volley:1.1.0'
 }

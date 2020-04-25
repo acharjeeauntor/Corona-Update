@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardBdId"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:background="#7AFFFFFF"
+    android:orientation="vertical"
+    android:padding="25dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FCFFFFFF">
+
+        <RelativeLayout
+            android:id="@+id/titleOfCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#fff">
+
+            <TextView
+                android:id="@+id/districtNameId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:padding="10dp"
+                android:text="Dhaka"
+                android:textColor="#A83A3737"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/districtNameBnId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/divider"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="16dp"
+                android:layout_toRightOf="@id/districtNameId"
+                android:text="Dhaka"
+                android:textColor="#A83A3737"
+                android:textSize="12dp" />
+
+            <View
+                android:id="@+id/divider"
+                style="@style/Divider"
+                android:layout_below="@+id/districtNameId"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/twocard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleOfCard"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:background="#fff">
+
+
+            <!--        second card-->
+
+
+            <RelativeLayout
+                android:id="@+id/secondCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#fff">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#fff">
+
+
+                    <RelativeLayout
+                        android:id="@+id/lastText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#fff">
+
+                        <TextView
+                            android:id="@+id/confirmedCase"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:text="Confirmed Case"
+                            android:textColor="#1665BE"
+                            android:textSize="26dp" />
+
+                        <TextView
+                            android:id="@+id/confirmedCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/confirmedCase"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginLeft="17dp"
+                            android:text="15"
+                            android:textColor="#B31111"
+                            android:textSize="24dp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/confirmedCount"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="10dp"
+                            android:gravity="center"
+                            android:text="Click For More details" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

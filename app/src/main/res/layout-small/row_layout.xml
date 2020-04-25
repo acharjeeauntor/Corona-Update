@@ -286,6 +286,7 @@
         android:layout_marginTop="4dp"
         android:textSize="6dp"
         android:text="Click For More Information"
+        android:layout_marginBottom="10dp"
         />
 
 </RelativeLayout>

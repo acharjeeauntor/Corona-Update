@@ -33,5 +33,19 @@
         android:textColor="#020202"
         android:textStyle="italic"
         android:textSize="30dp"
-        android:text="Author:Auntor Acharja"/>
+        android:text="Source:http://covid19tracker.gov.bd"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#020202"
+        android:textStyle="italic"
+        android:textSize="30dp"
+        android:text="Inspiration: Motiur Rahman"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#020202"
+        android:textStyle="italic"
+        android:textSize="30dp"
+        android:text="Developer: Auntor Acharja"/>
 </LinearLayout>
